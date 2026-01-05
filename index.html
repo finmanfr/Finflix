@@ -21,79 +21,6 @@
       z-index: 9999;
     }
 
-    #main-content {
-  display: none;
-  height: 100vh;
-  background: black;
-  color: white;
-  padding-bottom: 100px;
-}
-
-/* MOVIE ROW */
-#movie-row {
-  display: flex;
-  gap: 16px;
-  padding: 20px;
-  overflow-x: auto;
-}
-
-#movie-row::-webkit-scrollbar {
-  display: none;
-}
-
-.movie {
-  min-width: 140px;
-  height: 210px;
-  border-radius: 18px;
-  background-size: cover;
-  background-position: center;
-  cursor: pointer;
-  transition: transform 0.25s ease;
-}
-
-.movie:hover {
-  transform: scale(1.08);
-}
-
-/* BOTTOM NAV */
-#bottom-nav {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 20px;
-  padding: 14px 26px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(14px);
-}
-
-.nav-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 16px;
-}
-
-button {
-  border-radius: 999px;
-  border: none;
-  padding: 12px 22px;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.15);
-  color: white;
-  transition: all 0.25s ease;
-}
-
-button:hover {
-  background: rgba(255,255,255,0.35);
-  color: black;
-}
-
     video {
       width: 100%;
       height: 100%;
@@ -151,18 +78,13 @@ button:hover {
   </div>
 
   <!-- MAIN SITE (hidden at first) -->
-  <div id="main-content">
-  <div id="movie-row"></div>
-
-  <div id="bottom-nav">
-    <button class="nav-btn">🏠 Home</button>
-    <button class="nav-btn">🔍 Search</button>
+  <div id="main-content" style="display:none;">
+    <h1 style="color:white; text-align:center;">Welcome to Finflix</h1>
   </div>
-</div>
-
 
   <script>
     const skipBtn = document.getElementById("skip-btn");
+    const intro = document.getElementById("intro-container");
     const main = document.getElementById("main-content");
 
     // Show skip after 5 seconds
