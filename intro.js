@@ -1,15 +1,14 @@
-const unmuteBtn = document.getElementById("unmute-btn");
 const video = document.getElementById("introVideo");
+const unmuteBtn = document.getElementById("unmute-btn");
 const intro = document.getElementById("intro-container");
 const main = document.getElementById("main-content");
 
-// End intro
 function endIntro() {
   intro.style.display = "none";
   main.style.display = "block";
 }
 
-// Unmute button
+// Unmute
 unmuteBtn.onclick = () => {
   video.muted = false;
   video.volume = 1;
@@ -17,5 +16,5 @@ unmuteBtn.onclick = () => {
   unmuteBtn.style.display = "none";
 };
 
-// When video ends
+// When video ends → same as skip
 video.onended = endIntro;
