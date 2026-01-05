@@ -18,3 +18,18 @@ unmuteBtn.onclick = () => {
 
 // When video ends → same as skip
 video.onended = endIntro;
+
+<script>
+const movies = [
+  "K+K.png",
+];
+
+const row = document.getElementById("movie-row");
+
+movies.forEach(icon => {
+  const div = document.createElement("div");
+  div.className = "movie";
+  div.style.backgroundImage = `url(movies/icons/${icon})`;
+  row.appendChild(div);
+});
+</script>
