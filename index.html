@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Finflix</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #intro-container {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 9999;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #skip-btn {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      padding: 12px 20px;
+      font-size: 16px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      border: 1px solid white;
+      cursor: pointer;
+      display: none;
+    }
+
+    #skip-btn:hover {
+      background: white;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- INTRO -->
+  <div id="intro-container">
+    <video id="introVideo" autoplay muted playsinline>
+      <source src="intro.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <button id="skip-btn">Skip Intro</button>
+  </div>
+
+  <!-- MAIN SITE (hidden at first) -->
+  <div id="main-content" style="display:none;">
+    <h1 style="color:white; text-align:center;">Welcome to Finflix</h1>
+  </div>
+
+  <script>
+    const video = document.getElementById("introVideo");
+    const skipBtn = document.getElementById("skip-btn");
+    const intro = document.getElementById("intro-container");
+    const main = document.getElementById("main-content");
+
+    // Show skip after 5 seconds
+    setTimeout(() => {
+      skipBtn.style.display = "block";
+    }, 5000);
+
+    // Skip button click
+    skipBtn.onclick = endIntro;
+
+    // When video ends
+    video.onended = endIntro;
+
+    function endIntro() {
+      intro.style.display = "none";
+      main.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
