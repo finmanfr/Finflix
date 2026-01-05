@@ -1,0 +1,17 @@
+#unmute-btn {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  padding: 12px 18px;
+  font-size: 16px;
+  background: rgba(0,0,0,0.75);
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+#unmute-btn:hover {
+  background: white;
+  color: black;
+}
