@@ -182,7 +182,38 @@ button:hover {
       main.style.display = "block";
     }
   </script>
-<script src="intro.js"></script>
+<script>
+  const skipBtn = document.getElementById("skip-btn");
+  const unmuteBtn = document.getElementById("unmute-btn");
+  const video = document.getElementById("introVideo");
+  const intro = document.getElementById("intro-container");
+  const main = document.getElementById("main-content");
+
+  function endIntro() {
+    intro.style.display = "none";
+    main.style.display = "block";
+  }
+
+  // Show skip after 5 seconds
+  setTimeout(() => {
+    skipBtn.style.display = "block";
+  }, 5000);
+
+  // Skip intro
+  skipBtn.onclick = endIntro;
+
+  // Unmute button
+  unmuteBtn.onclick = () => {
+    video.muted = false;
+    video.volume = 1;
+    video.play();
+    unmuteBtn.style.display = "none";
+  };
+
+  // When video ends → auto-enter site
+  video.onended = endIntro;
+</script>
+
 
 </body>
 </html>
