@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Finflix</title>
 
   <style>
@@ -46,20 +46,21 @@
       border-radius: 6px;
     }
 
-    /* Player Overlay */
+    /* PLAYER OVERLAY */
     #player {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.9);
+      background: rgba(0, 0, 0, 0.9);
       display: none;
       justify-content: center;
       align-items: center;
       z-index: 999;
     }
 
-    video {
-      max-width: 90%;
-      max-height: 90%;
+    iframe {
+      width: 90%;
+      height: 90%;
+      border: none;
       background: black;
     }
 
@@ -75,43 +76,42 @@
 
 <body>
 
-<header>FINFLIX</header>
+  <header>FINFLIX</header>
 
-<div class="row-title">Trending</div>
-<div class="row">
+  <div class="row-title">Trending</div>
+  <div class="row">
 
-  <div class="card"
-    onclick="playVideo('https://drive.google.com/uc?export=download&id=1GFmb9jqDGRZXZPolZtdUp')">
-    <img src="thumbnails/K+K.png">
+    <!-- MOVIE CARD -->
+    <div class="card"
+      onclick="playVideo('1GFmb9jqDGRZXZPolZtdUp')">
+      <img src="thumbnails/K+K.png" />
+    </div>
+
   </div>
 
-</div>
+  <!-- VIDEO PLAYER -->
+  <div id="player">
+    <div id="close" onclick="closePlayer()">✕</div>
+    <iframe id="video" allow="autoplay" allowfullscreen></iframe>
+  </div>
 
-<!-- VIDEO PLAYER -->
-<div id="player">
-  <div id="close" onclick="closePlayer()">✕</div>
-  <video id="video" controls autoplay></video>
-</div>
+  <script>
+    function playVideo(id) {
+      const player = document.getElementById("player");
+      const iframe = document.getElementById("video");
 
-<script>
-  function playVideo(src) {
-    const player = document.getElementById("player");
-    const video = document.getElementById("video");
+      iframe.src = `https://drive.google.com/file/d/${id}/preview`;
+      player.style.display = "flex";
+    }
 
-    video.src = src;
-    player.style.display = "flex";
-    video.play();
-  }
+    function closePlayer() {
+      const player = document.getElementById("player");
+      const iframe = document.getElementById("video");
 
-  function closePlayer() {
-    const player = document.getElementById("player");
-    const video = document.getElementById("video");
-
-    video.pause();
-    video.src = "";
-    player.style.display = "none";
-  }
-</script>
+      iframe.src = "";
+      player.style.display = "none";
+    }
+  </script>
 
 </body>
 </html>
