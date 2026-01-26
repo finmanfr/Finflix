@@ -3,16 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Finflix</title>
+
   <style>
     body {
       margin: 0;
       background: #111;
       color: white;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    h1 {
-      margin: 20px;
+    header {
+      padding: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #e50914;
+    }
+
+    .row-title {
+      margin-left: 20px;
+      font-size: 20px;
     }
 
     .row {
@@ -23,13 +32,13 @@
     }
 
     .card {
-      min-width: 200px;
+      min-width: 220px;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.25s;
     }
 
     .card:hover {
-      transform: scale(1.1);
+      transform: scale(1.15);
     }
 
     .card img {
@@ -37,12 +46,12 @@
       border-radius: 6px;
     }
 
-    /* Video player overlay */
+    /* Player Overlay */
     #player {
-      display: none;
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.9);
+      display: none;
       justify-content: center;
       align-items: center;
       z-index: 999;
@@ -51,31 +60,37 @@
     video {
       max-width: 90%;
       max-height: 90%;
+      background: black;
     }
 
     #close {
       position: absolute;
       top: 20px;
       right: 30px;
-      font-size: 30px;
+      font-size: 32px;
       cursor: pointer;
     }
   </style>
 </head>
+
 <body>
 
-<h1>🎬 Finflix</h1>
+<header>FINFLIX</header>
 
+<div class="row-title">Trending</div>
 <div class="row">
-  <div class="card" onclick="playVideo('videos/movie1.mp4')">
-    <img src="thumbnails/movie1.jpg">
+
+  <div class="card"
+    onclick="playVideo('https://drive.google.com/uc?export=download&id=1GFmb9jqDGRZXZPolZtdUp')">
+    <img src="thumbnails/K+K.png">
   </div>
+
 </div>
 
-<!-- Video Player -->
+<!-- VIDEO PLAYER -->
 <div id="player">
-  <span id="close" onclick="closePlayer()">✖</span>
-  <video id="video" controls></video>
+  <div id="close" onclick="closePlayer()">✕</div>
+  <video id="video" controls autoplay></video>
 </div>
 
 <script>
