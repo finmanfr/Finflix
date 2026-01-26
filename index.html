@@ -46,7 +46,7 @@
       border-radius: 6px;
     }
 
-    /* PLAYER OVERLAY */
+    /* Player Overlay */
     #player {
       position: fixed;
       inset: 0;
@@ -57,10 +57,9 @@
       z-index: 999;
     }
 
-    iframe {
-      width: 90%;
-      height: 90%;
-      border: none;
+    video {
+      max-width: 90%;
+      max-height: 90%;
       background: black;
     }
 
@@ -80,35 +79,36 @@
 
   <div class="row-title">Trending</div>
   <div class="row">
-
-    <!-- MOVIE CARD -->
-    <div class="card"
-      onclick="playVideo('1GFmb9jqDGRZXZPolZtdUp')">
-      <img src="thumbnails/K+K.png" />
+    <div
+      class="card"
+      onclick="playVideo('https://drive.google.com/uc?export=download&id=1GFmb9jqDGRZXZPolZtdUp')"
+    >
+      <img src="thumbnails/K+K.png" alt="Movie thumbnail" />
     </div>
-
   </div>
 
   <!-- VIDEO PLAYER -->
   <div id="player">
     <div id="close" onclick="closePlayer()">✕</div>
-    <iframe id="video" allow="autoplay" allowfullscreen></iframe>
+    <video id="video" controls autoplay></video>
   </div>
 
   <script>
-    function playVideo(id) {
+    function playVideo(src) {
       const player = document.getElementById("player");
-      const iframe = document.getElementById("video");
+      const video = document.getElementById("video");
 
-      iframe.src = `https://drive.google.com/file/d/${id}/preview`;
+      video.src = src;
       player.style.display = "flex";
+      video.play();
     }
 
     function closePlayer() {
       const player = document.getElementById("player");
-      const iframe = document.getElementById("video");
+      const video = document.getElementById("video");
 
-      iframe.src = "";
+      video.pause();
+      video.src = "";
       player.style.display = "none";
     }
   </script>
