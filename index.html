@@ -1,9 +1,162 @@
-<script>
-/* ========= VIDEO PLAYER ========= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Finflix</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 25px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    #search {
+      background: #222;
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    /* ROW */
+    .row-title {
+      font-size: 22px;
+      margin: 20px 25px 10px;
+    }
+
+    .row {
+      display: flex;
+      gap: 15px;
+      padding: 0 25px;
+    }
+
+    .card {
+      width: 180px;
+      cursor: pointer;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 6px;
+      transition: transform 0.2s;
+    }
+
+    .card img:hover {
+      transform: scale(1.05);
+    }
+
+    /* PLAYER */
+    #player {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 32px;
+      cursor: pointer;
+    }
+
+    /* INTRO */
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      animation: fadeOut 1s ease forwards;
+      animation-delay: 3s;
+    }
+
+    .logo {
+      font-size: 140px;
+      font-weight: bold;
+      color: #e50914;
+      animation: zoomIn 2.5s ease;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.6); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- INTRO -->
+  <div id="intro">
+    <div class="logo">F</div>
+  </div>
+
+  <audio id="introSound" src="finflix-intro.mp3"></audio>
+
+  <!-- HEADER -->
+  <header>
+    FINFLIX
+    <input
+      type="text"
+      id="search"
+      placeholder="Search Movies or TV Shows"
+      onkeyup="searchTitles()"
+    />
+  </header>
+
+  <!-- ROW -->
+  <div class="row-title">Movies / TV Shows</div>
+
+  <div class="row">
+    <div
+      class="card"
+      data-title="Whiskers"
+      onclick="playVideo('https://drive.google.com/file/d/1GFmb9jqDGRZXZPolZtdUp-NFkOR-wmRb/preview')"
+    >
+      <img src="thumbnails/Whiskers" alt="Movie thumbnail" />
+    </div>
+  </div>
+
+  <!-- VIDEO PLAYER -->
+  <div id="player">
+    <div id="close" onclick="closePlayer()">✕</div>
+    <iframe
+      id="iframe"
+      width="640"
+      height="480"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
 function playVideo(src) {
   const player = document.getElementById("player");
   const iframe = document.getElementById("iframe");
-
   iframe.src = src;
   player.style.display = "flex";
 }
@@ -11,12 +164,10 @@ function playVideo(src) {
 function closePlayer() {
   const player = document.getElementById("player");
   const iframe = document.getElementById("iframe");
-
   iframe.src = "";
   player.style.display = "none";
 }
 
-/* ========= SEARCH ========= */
 function searchTitles() {
   const input = document.getElementById("search").value.toLowerCase();
   const cards = document.querySelectorAll(".card");
@@ -29,16 +180,13 @@ function searchTitles() {
   });
 }
 
-/* ========= IMAGE PRELOADING (runs during intro) ========= */
 window.addEventListener("DOMContentLoaded", () => {
-  const imagesToPreload = [
-    "thumbnails/Whiskers - 1.png"
-    // add more thumbnails here as you add movies
-  ];
-
-  imagesToPreload.forEach(src => {
-    const img = new Image();
-    img.src = src;
-  });
+  setTimeout(() => {
+    const intro = document.getElementById("intro");
+    if (intro) intro.style.display = "none";
+  }, 2500);
 });
 </script>
+
+</body>
+</html>
