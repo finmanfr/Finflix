@@ -80,38 +80,43 @@
   <div class="row-title">Trending</div>
   <div class="row">
     <div
-      class="card"
-      onclick="playVideo('https://drive.google.com/uc?export=download&id=1GFmb9jqDGRZXZPolZtdUp')"
-    >
-      <img src="thumbnails/K+K.png" alt="Movie thumbnail" />
-    </div>
+  class="card"
+  onclick="playVideo('https://drive.google.com/file/d/1GFmb9jqDGRZXZPolZtdUp-NFkOR-wmRb/preview')"
+>
+  <img src="thumbnails/K+K.png" alt="Movie thumbnail" />
+</div>
+
   </div>
 
-  <!-- VIDEO PLAYER -->
-  <div id="player">
-    <div id="close" onclick="closePlayer()">✕</div>
-    <video id="video" controls autoplay></video>
-  </div>
+<!-- VIDEO PLAYER -->
+<div id="player">
+  <div id="close" onclick="closePlayer()">✕</div>
+  <iframe
+    id="iframe"
+    width="640"
+    height="480"
+    allowfullscreen
+  ></iframe>
+</div>
 
-  <script>
-    function playVideo(src) {
-      const player = document.getElementById("player");
-      const video = document.getElementById("video");
+<script>
+  function playVideo(src) {
+    const player = document.getElementById("player");
+    const iframe = document.getElementById("iframe");
 
-      video.src = src;
-      player.style.display = "flex";
-      video.play();
-    }
+    iframe.src = src;
+    player.style.display = "flex";
+  }
 
-    function closePlayer() {
-      const player = document.getElementById("player");
-      const video = document.getElementById("video");
+  function closePlayer() {
+    const player = document.getElementById("player");
+    const iframe = document.getElementById("iframe");
 
-      video.pause();
-      video.src = "";
-      player.style.display = "none";
-    }
-  </script>
+    iframe.src = "";
+    player.style.display = "none";
+  }
+</script>
+
 
 </body>
 </html>
