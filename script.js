@@ -77,27 +77,36 @@ function closeTheater() {
   theaterOpen = false;
   theater.style.display = "none";
   theaterPlayer.innerHTML = "";
+  document.body.classList.remove("hide-cursor");
 }
 
+
 // ----- KEY HANDLING -----
+// =========================
+// KEY HANDLING (CLEAN)
+// =========================
+
 const keys = {};
+let comboUsed = false;
 
 document.addEventListener("keydown", e => {
-  keys[e.key.toLowerCase()] = true;
+  const key = e.key.toLowerCase();
+  keys[key] = true;
 
   // T → toggle theater mode
-  if (e.key.toLowerCase() === "t") {
+  if (key === "t") {
     theaterOpen ? closeTheater() : openTheater();
   }
 
-  // S + K → cycle iframe sources
-  if (keys["s"] && keys["p"] && theaterOpen) {
+  // S + P → cycle iframe sources (ONLY once per press)
+  if (keys["s"] && keys["p"] && theaterOpen && !comboUsed) {
+    comboUsed = true;
     cycleIndex++;
 
     if (cycleIndex < cycleSources.length) {
       loadTheaterIframe(cycleSources[cycleIndex]);
     } else {
-      // back to original movie
+      // return to original movie
       loadTheaterIframe(originalMovieSrc);
       cycleIndex = -1;
     }
@@ -110,8 +119,15 @@ document.addEventListener("keydown", e => {
 });
 
 document.addEventListener("keyup", e => {
-  keys[e.key.toLowerCase()] = false;
+  const key = e.key.toLowerCase();
+  keys[key] = false;
+
+  // reset combo when either key is released
+  if (key === "s" || key === "p") {
+    comboUsed = false;
+  }
 });
+
 
 // ----- OVERRIDE NORMAL PLAY WHEN THEATER IS OPEN -----
 window.playVideo = function (src) {
