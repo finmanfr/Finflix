@@ -9,9 +9,9 @@ let originalMovieSrc = null;
 
 // iframe sources you asked for
 const cycleSources = [
-  "https://www.youtube.com/embed/videoseries?list=PLQn122p5FtqKWAKseY3k3zdU7Bo6hQjy1&autoplay=1&mute=1",
-  "https://www.youtube.com/embed/saPd1ahi-MY?controls=0",
-  "https://www.youtube.com/embed/videoseries?list=PLh2QSchbA3pmzTYulmz95bcBKXrK2sSA0&autoplay=1&mute=1"
+  "https://www.youtube.com/embed/videoseries?list=PLQn122p5FtqKWAKseY3k3zdU7Bo6hQjy1&autoplay=1",
+  "https://www.youtube.com/embed/saPd1ahi-MY?controls=0&autoplay=1",
+  "https://www.youtube.com/embed/videoseries?list=PLh2QSchbA3pmzTYulmz95bcBKXrK2sSA0&autoplay=1"
 ];
 
 // ----- ELEMENTS -----
