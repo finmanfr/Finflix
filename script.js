@@ -89,44 +89,57 @@ function closeTheater() {
 const keys = {};
 let comboUsed = false;
 
-document.addEventListener("keydown", e => {
-  const key = e.key.toLowerCase();
-  keys[key] = true;
+window.addEventListener(
+  "keydown",
+  (e) => {
+    const key = e.key.toLowerCase();
+    keys[key] = true;
 
-  // T → toggle theater mode
-  if (key === "t") {
-    theaterOpen ? closeTheater() : openTheater();
-  }
-
-  // S + P → cycle iframe sources (ONLY once per press)
-  if (keys["s"] && keys["p"] && theaterOpen && !comboUsed) {
-    comboUsed = true;
-    cycleIndex++;
-
-    if (cycleIndex < cycleSources.length) {
-      loadTheaterIframe(cycleSources[cycleIndex]);
-    } else {
-      // return to original movie
-      loadTheaterIframe(originalMovieSrc);
-      cycleIndex = -1;
+    // STOP YouTube from stealing keys
+    if (theaterOpen && (key === "s" || key === "p" || key === "t")) {
+      e.preventDefault();
+      e.stopPropagation();
     }
-  }
 
-  // ESC → exit theater
-  if (e.key === "Escape" && theaterOpen) {
-    closeTheater();
-  }
-});
+    // T → toggle theater
+    if (key === "t") {
+      theaterOpen ? closeTheater() : openTheater();
+    }
 
-document.addEventListener("keyup", e => {
-  const key = e.key.toLowerCase();
-  keys[key] = false;
+    // S + P → cycle
+    if (theaterOpen && keys["s"] && keys["p"] && !comboUsed) {
+      comboUsed = true;
+      cycleIndex++;
 
-  // reset combo when either key is released
-  if (key === "s" || key === "p") {
-    comboUsed = false;
-  }
-});
+      if (cycleIndex < cycleSources.length) {
+        loadTheaterIframe(cycleSources[cycleIndex]);
+      } else {
+        loadTheaterIframe(originalMovieSrc);
+        cycleIndex = -1;
+      }
+    }
+
+    // ESC → exit
+    if (key === "escape" && theaterOpen) {
+      closeTheater();
+    }
+  },
+  true // 👈 CAPTURE PHASE (THIS IS THE MAGIC)
+);
+
+window.addEventListener(
+  "keyup",
+  (e) => {
+    const key = e.key.toLowerCase();
+    keys[key] = false;
+
+    if (key === "s" || key === "p") {
+      comboUsed = false;
+    }
+  },
+  true
+);
+
 
 
 // ----- OVERRIDE NORMAL PLAY WHEN THEATER IS OPEN -----
@@ -137,6 +150,8 @@ window.playVideo = function (src) {
     loadTheaterIframe(cycleSources[0]);
     return;
   }
+
+   
 
   normalIframe.src = src;
   normalPlayer.style.display = "flex";
