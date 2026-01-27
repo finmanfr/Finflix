@@ -199,9 +199,16 @@
 function playVideo(src) {
   const player = document.getElementById("player");
   const iframe = document.getElementById("iframe");
+
   iframe.src = src;
   player.style.display = "flex";
+
+  // request fullscreen
+  if (player.requestFullscreen) {
+    player.requestFullscreen();
+  }
 }
+
 
 function closePlayer() {
   const player = document.getElementById("player");
