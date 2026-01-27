@@ -79,7 +79,7 @@ document.addEventListener("keydown", e => {
   }
 
   // S + K → cycle iframe sources
-  if (keys["s"] && keys["k"] && theaterOpen) {
+  if (keys["s"] && keys["p"] && theaterOpen) {
     cycleIndex++;
 
     if (cycleIndex < cycleSources.length) {
