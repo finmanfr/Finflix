@@ -196,6 +196,11 @@
 
   <!-- SCRIPT -->
   <script>
+     function requestFullscreen() {
+  if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen();
+  }
+}
 function playVideo(src) {
   const player = document.getElementById("player");
   const iframe = document.getElementById("iframe");
@@ -203,11 +208,12 @@ function playVideo(src) {
   iframe.src = src;
   player.style.display = "flex";
 
-  // request fullscreen
-  if (player.requestFullscreen) {
-    player.requestFullscreen();
-  }
+  // request fullscreen (must be user-initiated)
+  requestFullscreen();
 }
+
+
+   
 
 
 function closePlayer() {
