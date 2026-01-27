@@ -45,20 +45,32 @@ document.querySelectorAll(".card").forEach(card => {
 function loadTheaterIframe(src) {
   theaterPlayer.innerHTML = `
     <iframe
-      width="1000"
-      height="700"
       src="${src}"
-      frameborder="0"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        border: 0;
+      "
       allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
       allowfullscreen>
     </iframe>
   `;
+}
+function requestFullscreen() {
+  if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen();
+  }
 }
 
 function openTheater() {
   theaterOpen = true;
   theater.style.display = "block";
   normalPlayer.style.display = "none";
+    document.body.classList.add("hide-cursor");
+     requestFullscreen();
 }
 
 function closeTheater() {
