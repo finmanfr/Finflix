@@ -31,6 +31,37 @@
       font-size: 14px;
     }
 
+    #theater {
+  position: fixed;
+  inset: 0;
+  background: black;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+#movie-list {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.movie {
+  cursor: pointer;
+  padding: 10px;
+  background: #222;
+  border-radius: 6px;
+}
+
+#theater-player iframe {
+  display: block;
+  margin: auto;
+}
+
+
     /* ROW */
     .row-title {
       font-size: 22px;
@@ -115,6 +146,8 @@
     <div class="logo">F</div>
   </div>
 
+  
+
   <audio id="introSound" src="finflix-intro.mp3"></audio>
 
   <!-- HEADER -->
@@ -152,6 +185,11 @@
       allowfullscreen
     ></iframe>
   </div>
+
+  <div id="theater" class="hidden">
+  <div id="movie-list"></div>
+  <div id="theater-player"></div>
+</div>
 
   <!-- SCRIPT -->
   <script>
